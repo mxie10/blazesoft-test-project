@@ -1,79 +1,77 @@
 'use client';
 
 import React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { tableHeader } from '@/public/static/bookTable';
-import bookList from '@/public/static/bookList';
 import { FaTrashAlt } from "react-icons/fa";
 import { useAppSelector, useAppDispatch } from '@/app/hooks/useReduxHooks';
 import { v4 as uuidv4 } from 'uuid';
+import { tableHeader } from '@/public/static/bookTableHeader';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button"
+import useAddBookModal from '../hooks/useAddBookModal';
 
 const Listings = () => {
 
-  const listings = useAppSelector((state) => state.listings.data)
+  const listings = useAppSelector((state) => state.listings.data);
+  const addBookModal = useAddBookModal(); 
 
-  console.log('listingArray:', listings);
+  const openAddBookModal = () => {
+    console.log('in openAddBookModal?');
+    addBookModal.onOpen();
+  }
 
-  // header of the table
+  // table header
   const Header = () => {
     return (
-      <TableHead>
-        <TableRow className=''>
+      <TableHeader>
+        <TableRow>
           {
-            tableHeader && tableHeader.map((header, index) => {
+            tableHeader && tableHeader.map((element, index) => {
               return (
-                <TableCell
-                  key={header.title}
-                  align={index === 0 ? 'left' : 'right'}
-                  className='font-bold text-md'
+                <TableHead
+                  key={element.title}
+                  className={`${index === 0 ? 'w-96' : index === 3 ? 'w-24' : ''} text-md font-bold`}
                 >
-                  {header.title}
-                </TableCell>
-              )
-            })
+                  {element.title}
+                </TableHead>
+            )})
           }
         </TableRow>
-      </TableHead>
+      </TableHeader>
     )
   }
 
-  // body of the table
+  // table body
   const Body = () => {
     return (
       <TableBody>
         {
-          bookList && bookList.map((row, index) => {
+          listings && listings.map((listing) => {
             return (
-              <TableRow
-                key={row.id}
-                className={`
-                    ${index % 2 === 0 ? 'bg-neutral-200' : 'bg-white'}
-                `}
-              >
-                <TableCell
-                  align="left"
-                  className='text-blue-700 cursor-pointer hover:underline'
+              <TableRow 
+                key={listing.id}>
+                <TableCell 
+                  className="font-medium cursor-pointer hover:underline text-blue-600"
                 >
-                  {row.name}
+                  {listing.name}
                 </TableCell>
-                <TableCell align="right">${row.price}</TableCell>
-                <TableCell align="right">{row.category}</TableCell>
-                <TableCell align="right" className='relative'>
+                <TableCell>${listing.price}</TableCell>
+                <TableCell>{listing.category}</TableCell>
+                <TableCell className="relative">
                   <FaTrashAlt 
-                    color='red' 
-                    className='absolute right-5 bottom-4 cursor-pointe cursor-pointer'  
+                    className='absolute right-6 bottom-5 cursor-pointer'
                     size={20}
+                    color='red'
                   />
                 </TableCell>
               </TableRow>
-            )
-          })
+          )})
         }
       </TableBody>
     )
@@ -81,15 +79,19 @@ const Listings = () => {
 
   return (
     <>
-      <TableContainer
-        component={Paper}
-        className='px-10 py-5 font-sans'
-      >
-        <Table>
-          <Header />
-          <Body />
-        </Table>
-      </TableContainer>
+      <div className='relative'>
+        <Button 
+          className='absolute right-0 bottom-2 bg-sky-700 text-white hover:bg-sky-500'
+          variant="outline"
+          onClick={openAddBookModal}
+        >
+          + Add book
+        </Button>
+      </div>
+      <Table className=''>
+        <Header />
+        <Body/>
+      </Table>
     </>
   )
 }
