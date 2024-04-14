@@ -7,12 +7,15 @@ export interface BookDetailsModalProps {
   onClose: () => void;
   data: Book;
   setData: (data:Book) => void;
+  showError:boolean;
+  setShowError: () => void
+  setHideError: () => void;
 }
 
 const useBookDetailsModal = create<BookDetailsModalProps>((set)=>({
     isOpen:false,
     onOpen: () => set({isOpen:true}),
-    onClose: () => set({isOpen: false}),
+    onClose: () => set({isOpen: false, showError:false}),
     data:{
       id: '',
       name: '',
@@ -20,7 +23,10 @@ const useBookDetailsModal = create<BookDetailsModalProps>((set)=>({
       category:'',
       description:''
     },
-    setData: (data) => set({data:data})
+    setData: (data) => set({data:data}),
+    showError:false,
+    setShowError: () => set({showError:true}),
+    setHideError: () => set({showError:false})
 }))
 
 export default useBookDetailsModal;

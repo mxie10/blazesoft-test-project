@@ -20,7 +20,7 @@ const AddBookModal = () => {
       ...data,
       [e.target.name]: e.target.value.trim()
     })
-    if(!data.name.length){
+    if(data.name.length){
       setHideError();
     }
   }
@@ -79,7 +79,6 @@ const AddBookModal = () => {
             Book name is required.
         </div> : null
       }
-
     </div>
   )
 
