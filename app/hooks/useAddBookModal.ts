@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Book } from '../types/book';
+import { Book } from '@/app/types/book';
 
 interface AddBookModalProps {
   isOpen:boolean;
@@ -7,12 +7,19 @@ interface AddBookModalProps {
   onClose: () => void;
   data: Book;
   setData: (data:Book) => void;
+  showError:boolean;
+  setShowError: () => void
+  setHideError: () => void;
 }
 
 const useAddBookModal = create<AddBookModalProps>((set)=>({
     isOpen:false,
     onOpen: () => set({isOpen:true}),
-    onClose: () => set({isOpen: false}),
+    onClose: () => set({
+      isOpen: false, 
+      showError:false,
+      data: { id: '', name: '', price: 0, category: '', description: '' }
+    }),
     data:{
       id: '',
       name: '',
@@ -20,7 +27,10 @@ const useAddBookModal = create<AddBookModalProps>((set)=>({
       category:'',
       description:'',
     },
-    setData: (data) => set({data:data})
+    setData: (data) => set({data:data}),
+    showError:false,
+    setShowError: () => set({showError:true}),
+    setHideError: () => set({showError:false})
 }))
 
 export default useAddBookModal;

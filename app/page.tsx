@@ -3,7 +3,7 @@
 */
 
 import Container from '@/app/components/Container';
-import Listings from './components/Listings';
+import Listings from '@/app/components/Listings';
 
 export default async function Dashboard() {
 

@@ -5,7 +5,7 @@ export const fields = [
   },
   {
     name: 'price',
-    value: 'Price:'
+    value: 'Price($):'
   },
   {
     name: 'category',

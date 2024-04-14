@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Book } from '../types/book';
+import { Book } from '@/app/types/book';
 
 export interface BookDetailsModalProps {
   isOpen:boolean;
@@ -19,7 +19,7 @@ const useBookDetailsModal = create<BookDetailsModalProps>((set)=>({
       price: 0,
       category:'',
       description:''
-    } as Book,
+    },
     setData: (data) => set({data:data})
 }))
 
