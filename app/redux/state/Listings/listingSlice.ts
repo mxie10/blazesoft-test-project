@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../../store';
 import listings from '@/public/static/bookList';
 import { Book } from '@/app/types/book';
 
@@ -16,6 +15,9 @@ export const listingSlice = createSlice({
     name: 'listings',
     initialState,
     reducers: {
+        getListing: (state, action:PayloadAction<string>) => {
+            state.data.find(item => item.id === action.payload);
+        },
         addListing: (state, action: PayloadAction<Book>) => {
             state.data.push(action.payload);
         },
@@ -31,6 +33,6 @@ export const listingSlice = createSlice({
     }
 })
 
-export const { addListing, deleteListing, updateListing } = listingSlice.actions;
+export const { getListing, addListing, deleteListing, updateListing } = listingSlice.actions;
 
 export default listingSlice.reducer;

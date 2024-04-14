@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { FaTrashAlt } from "react-icons/fa";
-import { useAppSelector, useAppDispatch } from '@/app/hooks/useReduxHooks';
-import { v4 as uuidv4 } from 'uuid';
+import { useAppSelector, useAppDispatch } from '@/app/hooks/useRedux';
 import { tableHeader } from '@/public/static/bookTableHeader';
 import {
   Table,
@@ -15,15 +14,17 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button"
 import useAddBookModal from '../hooks/useAddBookModal';
+import useBookDetailsModal from '../hooks/useBookDetailsModal';
+import { Book } from '../types/book';
 
 const Listings = () => {
 
   const listings = useAppSelector((state) => state.listings.data);
-  const addBookModal = useAddBookModal(); 
+  const addBook = useAddBookModal(); 
+  const bookDetails = useBookDetailsModal();
 
   const openAddBookModal = () => {
-    console.log('in openAddBookModal?');
-    addBookModal.onOpen();
+    addBook.onOpen();
   }
 
   // table header
@@ -49,6 +50,18 @@ const Listings = () => {
 
   // table body
   const Body = () => {
+
+    const handleBookDetails = (listing:Book) => {
+      bookDetails.setData({
+        id: listing.id,
+        name: listing.name,
+        price: listing.price,
+        category:listing.category,
+        description:listing.description,
+      })
+      bookDetails.onOpen();
+    }
+
     return (
       <TableBody>
         {
@@ -58,6 +71,7 @@ const Listings = () => {
                 key={listing.id}>
                 <TableCell 
                   className="font-medium cursor-pointer hover:underline text-blue-600"
+                  onClick={() => handleBookDetails(listing)}
                 >
                   {listing.name}
                 </TableCell>
@@ -88,7 +102,7 @@ const Listings = () => {
           + Add book
         </Button>
       </div>
-      <Table className=''>
+      <Table>
         <Header />
         <Body/>
       </Table>

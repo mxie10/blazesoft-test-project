@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { Book } from '../types/book';
 
-interface AddBookModalProps {
+export interface BookDetailsModalProps {
   isOpen:boolean;
   onOpen: () => void;
   onClose: () => void;
@@ -9,7 +9,7 @@ interface AddBookModalProps {
   setData: (data:Book) => void;
 }
 
-const useAddBookModal = create<AddBookModalProps>((set)=>({
+const useBookDetailsModal = create<BookDetailsModalProps>((set)=>({
     isOpen:false,
     onOpen: () => set({isOpen:true}),
     onClose: () => set({isOpen: false}),
@@ -18,9 +18,9 @@ const useAddBookModal = create<AddBookModalProps>((set)=>({
       name: '',
       price: 0,
       category:'',
-      description:'',
-    },
+      description:''
+    } as Book,
     setData: (data) => set({data:data})
 }))
 
-export default useAddBookModal;
+export default useBookDetailsModal;
