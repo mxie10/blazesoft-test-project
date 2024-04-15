@@ -1,3 +1,7 @@
+/*
+* Book details modal
+*/
+
 import React from 'react';
 import { useAppDispatch } from '@/app/hooks/useRedux';
 import { Input } from "@/components/ui/input"

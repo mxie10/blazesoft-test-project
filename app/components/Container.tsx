@@ -1,3 +1,7 @@
+/*
+* Layout container
+*/
+
 import React from 'react';
 
 interface ContainerProps {

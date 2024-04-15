@@ -1,7 +1,3 @@
-/*
-* Dashboard is rendered on server
-*/
-
 import Container from '@/app/components/Container';
 import Listings from '@/app/components/Listings';
 

@@ -1,3 +1,8 @@
+/*
+* Modal container for all modals
+* Actual body content is passed here as props
+*/
+
 import React from 'react';
 import { Button } from "@/components/ui/button"
 import {
@@ -18,10 +23,6 @@ interface ModalProps {
   handleAction?: () => void;
 }
 
-/*
-* Modal container for all modals
-* Actual body content is passed here as props
-*/
 const Modal:React.FC<ModalProps> = (props) => {
 
   const {defaultOpen,isOpen,onOpenChange,title,body,actionLabel,handleAction} = props;
