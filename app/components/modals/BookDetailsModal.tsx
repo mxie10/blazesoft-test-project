@@ -66,8 +66,7 @@ const BookDetailsModal = () => {
         })}
       {
         showError ?
-          <div
-            className='text-center text-red-600'>
+          <div className='text-center text-red-600'>
             Book name cannot be empty
           </div> : null
       }

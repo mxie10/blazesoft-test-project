@@ -74,8 +74,7 @@ const AddBookModal = () => {
         })}
       {
         showError ? 
-        <div
-          className='text-center text-red-600'>
+        <div className='text-center text-red-600'>
             Book name is required.
         </div> : null
       }
