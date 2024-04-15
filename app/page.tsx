@@ -11,7 +11,7 @@ export default async function Dashboard() {
 
   return (
     <Container>
-      <div className='w-full md:w-4/5'>
+      <div className='w-full lg:w-4/5'>
         <Listings />
       </div>
     </Container>

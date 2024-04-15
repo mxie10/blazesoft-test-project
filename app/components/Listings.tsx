@@ -21,7 +21,7 @@ const Listings = () => {
 
   const listings = useAppSelector((state) => state.listings.data);
   const dispatch = useAppDispatch();
-  const addBook = useAddBookModal(); 
+  const addBook = useAddBookModal();
   const bookDetails = useBookDetailsModal();
 
   const openAddBookModal = () => {
@@ -42,7 +42,8 @@ const Listings = () => {
                 >
                   {element.title}
                 </TableHead>
-            )})
+              )
+            })
           }
         </TableRow>
       </TableHeader>
@@ -52,19 +53,19 @@ const Listings = () => {
   // table body
   const Body = () => {
 
-    const handleBookDetails = (listing:Book) => {
+    const handleBookDetails = (listing: Book) => {
       bookDetails.setData({
         id: listing.id,
         name: listing.name,
         price: listing.price,
-        category:listing.category,
-        description:listing.description,
+        category: listing.category,
+        description: listing.description,
       })
       bookDetails.onOpen();
     }
 
     //handle delete book
-    const handleDeleteBook = (id:string) => {
+    const handleDeleteBook = (id: string) => {
       dispatch(deleteListing(id));
     }
 
@@ -73,9 +74,9 @@ const Listings = () => {
         {
           listings && listings.map((listing) => {
             return (
-              <TableRow 
+              <TableRow
                 key={listing.id}>
-                <TableCell 
+                <TableCell
                   className="font-medium cursor-pointer hover:underline text-blue-600"
                   onClick={() => handleBookDetails(listing)}
                 >
@@ -84,15 +85,16 @@ const Listings = () => {
                 <TableCell>${listing.price}</TableCell>
                 <TableCell>{listing.category}</TableCell>
                 <TableCell className="relative">
-                  <FaTrashAlt 
+                  <FaTrashAlt
                     className='absolute right-6 bottom-5 cursor-pointer'
                     size={20}
                     color='red'
-                    onClick = {()=>handleDeleteBook(listing.id)}
+                    onClick={() => handleDeleteBook(listing.id)}
                   />
                 </TableCell>
               </TableRow>
-          )})
+            )
+          })
         }
       </TableBody>
     )
@@ -100,18 +102,20 @@ const Listings = () => {
 
   return (
     <>
-      <div className='relative'>
-        <Button 
-          className='absolute right-0 bottom-2 px-5 font-bold'
-          onClick={openAddBookModal}
-        >
-          + Add book
-        </Button>
+      <div className='flex flex-col gap-2'>
+        <div className='relative'>
+          <Button
+            className='float-end px-5 font-bold'
+            onClick={openAddBookModal}
+          >
+            + Add book
+          </Button>
+        </div>
+        <Table>
+          <Header />
+          <Body />
+        </Table>
       </div>
-      <Table>
-        <Header />
-        <Body/>
-      </Table>
     </>
   )
 }

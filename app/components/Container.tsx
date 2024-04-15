@@ -10,11 +10,10 @@ const Container:React.FC<ContainerProps> = ({children}) => {
       className='
         min-h-screen 
         p-2 
-        md:p-20 
+        lg:p-20 
         flex 
         flex-col 
         items-center 
-        justify-center
       '
     >
         {children}
