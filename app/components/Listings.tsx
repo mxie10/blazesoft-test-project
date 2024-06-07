@@ -16,6 +16,8 @@ import { deleteListing } from '../redux/state/Listings/listingSlice';
 import { Book } from '../types/book';
 import useAddBookModal from '../hooks/useAddBookModal';
 import useBookDetailsModal from '../hooks/useBookDetailsModal';
+import AddBookModal from './modals/AddBookModal';
+import BookDetailsModal from './modals/BookDetailsModal';
 
 const Listings = () => {
 
@@ -116,6 +118,8 @@ const Listings = () => {
           <Body />
         </Table>
       </div>
+      <AddBookModal/>
+      <BookDetailsModal/>
     </>
   )
 }
